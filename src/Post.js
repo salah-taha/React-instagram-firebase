@@ -12,7 +12,7 @@ const Post = ({ post }) => {
           src="/static/images/avatar/1.jpg"
         />
         <div className="post__userInfo">
-          <h4>{post.user}</h4>
+          <h4>{post.username}</h4>
           <p>Egypt, Cairo</p>
         </div>
       </div>
@@ -22,7 +22,7 @@ const Post = ({ post }) => {
         alt={`${post.user}:post image`}
       />
       <h4 className="post__text">
-        <strong>{post.user}: </strong>
+        <strong>{post.username}: </strong>
         {post.caption}
       </h4>
     </div>

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Post from "./Post";
-import { db, auth, storage } from "./firebase";
+import { db, auth } from "./firebase";
 import { Button, Modal, Input, makeStyles } from "@material-ui/core";
+import ImageUpload from "./ImageUpload";
 
 function getModalStyle() {
   return {
@@ -56,9 +57,11 @@ function App() {
   }, [user]);
 
   useEffect(() => {
-    db.collection("posts").onSnapshot((snapshot) => {
-      setPosts(snapshot.docs);
-    });
+    db.collection("posts")
+      .orderBy("timestamp")
+      .onSnapshot((snapshot) => {
+        setPosts(snapshot.docs);
+      });
   }, []);
 
   const signUp = async (event) => {
@@ -90,6 +93,8 @@ function App() {
   const uploadPhoto = () => {};
   return (
     <div className="app">
+      {user && <ImageUpload username={user.displayName} />}
+
       <Modal
         className="authenticationModal__modal"
         open={open}
