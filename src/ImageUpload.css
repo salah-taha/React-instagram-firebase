@@ -1,0 +1,14 @@
+.imageupload {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  z-index: 2;
+  bottom: 0;
+  align-items: center;
+  padding: 10px 0;
+}
+.imageupload * {
+  width: 60%;
+}

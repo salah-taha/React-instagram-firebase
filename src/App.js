@@ -58,7 +58,7 @@ function App() {
 
   useEffect(() => {
     db.collection("posts")
-      .orderBy("timestamp")
+      .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
         setPosts(snapshot.docs);
       });
@@ -93,8 +93,6 @@ function App() {
   const uploadPhoto = () => {};
   return (
     <div className="app">
-      {user && <ImageUpload username={user.displayName} />}
-
       <Modal
         className="authenticationModal__modal"
         open={open}
@@ -218,9 +216,22 @@ function App() {
         )}
       </div>
 
-      {posts.map((post) => (
-        <Post post={post.data()} key={post.id} />
-      ))}
+      <div className="app__posts">
+        {posts.map((post) => (
+          <Post
+            post={post.data()}
+            id={post.id}
+            username={user?.displayName}
+            key={post.id}
+          />
+        ))}
+      </div>
+
+      {user ? (
+        <ImageUpload username={user.displayName} />
+      ) : (
+        <div>Login to Upload</div>
+      )}
     </div>
   );
 }
